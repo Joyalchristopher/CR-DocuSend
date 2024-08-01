@@ -1,0 +1,432 @@
+.flexclass{
+    display: flex;
+    gap: 40px;
+    margin-bottom: 12px;
+}
+.drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width:85%;
+}
+.uploadNotes{
+    color: #00546E;
+    font-weight: bold;
+    font-size: 16px;
+}
+.notes{
+    text-align: center;
+    margin-bottom:40px ;
+    margin-top: 25px;
+}
+.warning{
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+.warningnotes{
+    color: red;
+    font-size: 14px;
+}
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.drop-zone:hover {
+    border-color: #999;
+}
+.modal-content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	pointer-events: auto;
+	background-clip: padding-box;
+	border-radius: 0.3rem;
+	outline: 0;
+	border: none;
+}
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+.modal-backdropOver {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+}
+.modal-visible {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 33px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    border-radius: 12px;
+    width: max-content;
+}
+.modal-visibleOver {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 33px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    border-radius: 12px;
+    width: max-content;
+}
+
+.warningupload{
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 150px;
+}
+.uploadClose{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.uploadLimit{
+    text-align: center;
+    color:black;
+    font-size: 16px;
+    font-weight: 600;
+}
+.progressClass{
+    width: 451px;
+    padding-top: 5px;
+}
+.tickClass{
+    background-color: green;
+    width: 29px;
+    height: 25px;
+    border-radius: 20px;
+}
+.Header{
+    display: flex;
+}
+.close{
+    margin-left: auto;
+}
+.heading{
+    margin-left: auto;
+}
+.times{
+    font-size: x-large;
+}
+.errorColor{
+    color: red;
+    border: 1px solid red;
+    border-radius: 50%;
+}
+.nameClass{
+    width: 26%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.EnDiv{
+    display: flex;
+}
+.DoneButton{
+    margin-left: auto;
+}
+.Dbut{
+    background-color: darkblue;
+    color: white;
+    border: 1px solid darkblue;
+    border-radius: 4px
+}
+.flexii{
+    display: flex;
+    border: 1px solid #999999;
+    width: 200px;
+    align-items: center;
+    border-radius: 4px;
+}
+.flexiclass{
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+}
+.overClass{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.myProgress {
+    width: 100%;
+    border-radius:12px;
+    background-color: #ddd;
+  }
+  .myProgressUpload {
+    width: 100%;
+    border-radius:12px;
+    background-color: #ddd;
+  }
+  
+  .myBar {
+    width: 5%;
+    border-radius:12px;
+    height: 10px;
+    background-color: darkblue;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+.crossFunc{
+    font-size: xx-large;
+    position: relative;
+    bottom: 10px;
+}
+
+
+  .myBarUpload {
+    width: 5%;
+    border-radius:12px;
+    height: 10px;
+    background-color: darkblue;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+  .inputDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .support{
+    position: relative;
+    bottom: 150px;
+    font-size: 10px;
+    color: #666666
+  }
+  .max{
+    position: relative;
+    bottom: 130px;
+    font-size: 10px;
+    color: #666666
+  }
+  .icon{
+    width: 21px;
+  }
+  .fileName{
+    font-size: 10px;
+    width: 120px;
+  }
+
+  .formClass{
+    display: flex;
+    margin-left: 7%;
+    justify-content: space-evenly;
+}
+.div1{
+    width: 40%;
+}
+.main{
+    background-color: #E6F5F9;
+    padding-top: 43px;
+    padding-bottom: 20px;
+}
+
+  .fullclass{
+    width: 751px;
+    height: 155px;
+    background-color:#E6F5F9;
+    border-radius: 8px;
+    border: 1px solid #00546E;
+    
+    }
+    .title{
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: 
+    #00546E;
+    position: relative;
+    top: 19%;
+    
+    
+    }
+    .contant{
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color:#134453;
+    margin-top: 6%;
+    margin-left: 3%;
+    
+    }
+    .img{
+    width: 41px;
+        height: 22px;
+        gap: 0px;
+        opacity: 0px;
+        margin-left: 47%;
+        position: relative;
+        top: 13%;
+    
+    }
+    .heading{
+        font-size: 30px;
+        font-weight: 700;
+        color: black;
+
+    }
+    .head{
+        font-size: 20px;
+        font-weight: 600;
+        color: black;
+
+    }
+    
+     .width{
+        position: relative;
+        left: 148px;
+        top: 31px;
+     overflow: hidden;
+     text-decoration: none;
+     border: none;
+     width: 60%;
+     /* height: 100vh; */
+ 
+ } 
+
+ .buttonSubmit{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+
+
+
+/* ....................................... */
+
+
+
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input::before {
+    content: 'Reupload';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+  .custom-file-input:hover::before {
+    border-color: black;
+  }
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
+  .test{
+    border: none;
+    margin-right: 225px;
+    }
+
+
+    .SubmitBut{
+        /* margin-right: 178px; */
+    }
+/* ...................................... */
+
+ .fulform{
+    background-color: white;
+    margin-left: 22%;
+    margin-right: 23%;
+    padding-top: 20px;
+    margin-bottom: 20px;
+ }
+
+
+
+ @media only screen and (max-width: 1500px){
+    .fulform{
+        margin-left: 19%;
+    margin-right: 19%;
+    }
+ }
+
+ @media only screen and (max-width: 1200px){
+    .fulform{
+        margin-left: 16%;
+    margin-right: 16%;
+    }
+    .fullclass{
+        width: 90%;
+        height: 180px;
+    }
+ }
+
+ @media only screen and (max-width: 1000px){
+    .fulform{
+        margin-left: 10%;
+    margin-right: 10%;
+    }
+ }
+
+ @media only screen and (max-width: 600px){
+ 
+.formClass{
+    flex-direction: column;
+    gap: 10px;
+}
+.div1{
+    width: 91%;
+}
+.contant{
+    margin-top: 15%;
+}
+
+}
+
+
+@media only screen and (max-width: 400px){
+
+    .support{
+        font-size: 5px
+    }
+}

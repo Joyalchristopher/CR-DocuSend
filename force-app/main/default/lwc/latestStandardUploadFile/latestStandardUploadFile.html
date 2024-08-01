@@ -1,0 +1,306 @@
+<template>
+  <div class="slds-grid slds-wrap slds-grid_align-center  slds-p-around_large fulldiv">
+    <div class="slds-size_1-of-1 slds-large-size_12-of-12 slds-text-align_center">
+        <img src={brandImage} if:true={brandLogo}>
+<div if:true={HeadingNotes}>
+      <p class="heading slds-m-left_x-large">Welcome to the Patient Support Portal!</p>
+      <p class="subHeading">This site provides patients, caregivers, and healthcare professionals with a fast, secure
+        way to<br>submit patient enrollment and supporting documentation to our patient services program team.</p>
+</div>
+      <div class="slds-m-top_xx-large slds-align_absolute-center">
+        <div class="backround slds-size_1-of-1 slds-large-size_7-of-12 slds-p-bottom_small slds-p-top_small
+  slds-p-right_medium slds-p-left_medium ">
+          <div class="wihiteBack slds-size_1-of-1 slds-large-size_10-of-10 slds-p-bottom_small slds-p-top_small
+  slds-p-right_medium slds-p-left_medium">
+
+            <lightning-progress-indicator if:true={HeadingNotes} current-step={currentStep}  type="base" variant="base">
+              <lightning-progress-step label='Program Selection' value="1"></lightning-progress-step>
+              <lightning-progress-step label='Patient Information' value="2"></lightning-progress-step>
+              <lightning-progress-step label='Upload Files' value="3"></lightning-progress-step>
+            </lightning-progress-indicator>
+
+            <template if:true={careSelection}>
+              <div class="slds-text-align_center slds-m-top_x-large">
+                <p class="head">Program Selection</p>
+                <p class="uploadNotes">For any questions or concerns, please contact us at the phone number located
+                  on your enrollment form.</p>
+              </div>
+
+
+              <div>
+                <div class="slds-grid slds-grid_vertical slds-align_absolute-center">
+                  <div class="slds-col slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_4-of-12">
+                    <div class="combox slds-col slds-text-align_left slds-m-top_x-large">
+                      <lightning-combobox value={value} label="Please Select your Care Program to get started"
+                        placeholder="Select your Program" options={careProgramOptions} onchange={handleChange} required>
+                      </lightning-combobox>
+                    </div>
+                  </div>
+                  <div if:true={errormsg}>
+                    <p class="warningnotes">Select a program</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="slds-m-top_large slds-text-align_center slds-grid slds-grid_align-center slds-m-vertical_large">
+                <!-- Adds margin top medium -->
+                <lightning-button onclick={conclick} label="Next" variant="brand" class="NextButton"></lightning-button>
+              </div>
+            </template>
+
+            <template if:true={submiterDetails}>
+              <div class="slds-text-align_center">
+                <p class="head">Patient Information</p>
+                <p class="uploadNotes">For any questions or concerns, please contact us at the phone number located
+                  on your enrollment form.</p>
+              </div>
+              <div class="slds-grid slds-gutters slds-p-left_small slds-p-right_small slds-text-align_left responsive-grid">
+    <div class="slds-col slds-size_6-of-12 slds-p-left_small responsive-col">
+      <lightning-combobox
+        name="submitterType"
+        label="Submitter Type"
+        value={selectedSubmitterType}
+        options={picklistOptions}
+        onchange={handleInputChange}
+        required
+      ></lightning-combobox>
+      <br /><br />
+      <div class="slds-grid slds-grid_vertical slds-gutters_xx-small">
+        <div class="slds-col">
+          <lightning-input
+            name="patientDateOfBirth"
+            label="Patient Date of Birth"
+            onchange={handleInputChange}
+            type="date"
+            class={errorClass}
+          ></lightning-input>
+        </div>
+        <div class="slds-col">
+          <p class="warningnotes" if:true={DobErrorMessage}>Date of Birth is required</p>
+          <p class="warningnotes" if:true={DobErrorMessageValid}>Please enter a valid Date of Birth</p>
+        </div>
+      </div>
+      <br />
+      <div class="slds-grid slds-grid_vertical slds-gutters_xx-small" if:true={NoPatient}>
+        <div class="slds-col">
+          <lightning-input
+            name="submitterEmail"
+            class={errorClass}
+            label="Submitter Email"
+            onchange={handleInputChange}
+            type="email"
+          ></lightning-input>
+        </div>
+        <div class="slds-col">
+          <p class="warningnotes" if:true={EmailErrorMessage}>Email is required</p>
+          <p class="warningnotes" if:true={EmailErrorMessageValid}>Please enter a valid email</p>
+        </div>
+      </div>
+    </div>
+    <div class="slds-col slds-size_6-of-12 slds-p-left_small responsive-col">
+      <div class="slds-grid slds-grid_vertical slds-gutters_xx-small">
+        <div class="slds-col">
+          <lightning-input
+            name="patientFullName"
+            label="Patient Full Name"
+            data-field="patientFN"
+            onchange={handleInputChange}
+            class={errorClass}
+          ></lightning-input>
+        </div>
+        <div class="slds-col">
+          <p class="warningnotes" if:true={fullNameErrorMessage}>Patient full name is required</p>
+          <p class="warningnotes" if:true={fullNameErrorMessageValid}>Please enter a valid full name</p>
+        </div>
+      </div>
+      <br /><br />
+      <div class="slds-grid slds-grid_vertical slds-gutters_xx-small" if:true={NoPatient}>
+        <div class="slds-col">
+          <lightning-input
+            name="submitterFullName"
+            label="Submitter Full Name"
+            onchange={handleInputChange}
+            class={errorClass}
+            required
+          ></lightning-input>
+        </div>
+        <div class="slds-col">
+          <p class="warningnotes" if:true={SubNameErrorMessage}>Submitter full name is required</p>
+          <p class="warningnotes" if:true={SubNameErrorMessageValid}>Please enter a valid Submitter full name</p>
+        </div>
+      </div>
+      <div class="slds-grid slds-grid_vertical slds-gutters_xx-small" if:true={PatientYes}>
+        <div class="slds-col">
+          <lightning-input
+            name="submitterEmail"
+            label="Patient Email"
+            onchange={handleInputChange}
+            type="email"
+            class={errorClass}
+          ></lightning-input>
+        </div>
+        <div class="slds-col">
+          <p class="warningnotes" if:true={EmailErrorMessage}>Email is required</p>
+          <p class="warningnotes" if:true={EmailErrorMessageValid}>Please enter a valid email</p>
+        </div>
+      </div>
+    </div>
+  </div>
+             <div >
+  <div if:true={boterror} class="slds-m-top_x-medium slds-align_absolute-center slds-col slds-size_1-of-2" >
+    <section aria-describedby="dialog-body-id-217" aria-labelledby="dialog-heading-id-1" class="slds-popover slds-popover_error slds-nubbin_bottom" role="dialog">
+        <button class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse" title="Close dialog">
+        <div class="slds-button__icon" aria-hidden="true">
+        <p>X</p>
+        </div>
+        <span class="slds-assistive-text">Close dialog</span>
+        </button>
+        <header class="slds-popover__header">
+        <div class="slds-media slds-media_center slds-has-flexi-truncate ">
+        <div class="slds-media__figure">
+        <span class="slds-icon_container slds-icon-utility-error">
+        <div class="slds-icon slds-icon_x-small" aria-hidden="true">
+             <img src={img} alt="My Image" />
+        </div>
+        </span>
+        </div>
+        <div class="slds-media__body">
+        <h2 class="slds-truncate slds-text-heading_medium" id="dialog-heading-id-1" title="We hit a snag.">We hit a snag.</h2>
+        </div>
+        </div>
+        </header>
+        <div class="slds-popover__body" id="dialog-body-id-217">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+        <a href="#" title="Learn More">Learn More</a>
+        </p>
+        </div>
+        <footer class="slds-popover__footer">
+        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end">
+        <button class="slds-button slds-button_neutral">Learn More</button>
+        </div>
+        </footer>
+        </section>
+  </div>
+  <div class="slds-m-top_x-medium  slds-align_absolute-center slds-col slds-size_1-of-2" >
+    <iframe src={navigateToV3} name="captchaFrame" onload={captchaLoadedV3} class="test"></iframe>
+</div>
+</div>            
+  <div class="slds-grid slds-grid_align-center slds-m-vertical_large">
+                <lightning-button label="Back" onclick={handleBackButtonClick} variant="brand"
+                  class="slds-m-right_small NextButton">
+                </lightning-button>
+                <lightning-button label="Next" onclick={handleForm} class="NextButton" variant="brand">
+                </lightning-button>
+              </div>
+            </template>
+
+            <template if:true={uploadTemp}>
+
+              <div class="slds-text-align_center">
+                <p class='uploadNotes'>Please use the form below to upload documents.</p>
+                <img src={lockIcon}>
+                <p>Securely submit documents to the program using the upload feature below. All file uploads are
+                  secured using AES 256 SSL/TLS encryption.</p>
+                <div>
+                  <div>
+                    <img src={warning}>
+                  </div>
+                  <div>
+                    <p class='warning'>Warning !</p>
+                  </div>
+                </div>
+                <p class='warningnotes'>1.Please be aware once you select your file, It cannot be removed.</p>
+                <p class='warningnotes'>2.Do not upload password protected files, It will not be processed.</p>
+              </div>
+              <div class="slds-grid slds-grid_vertical slds-align_absolute-center">
+                <div class="slds-text-align_center slds-m-bottom_medium ">
+                  <lightning-file-upload accept={acceptedFormats} multiple
+                    onuploadfinished={handleFileUpload}></lightning-file-upload>
+                  <p class="support">(Supported file formats are:
+                    docx,.doc,.pdf,.bmp,.xlsx,.xls,.txt,.jpg,.jpeg,.tiff,.tif,.gif,.png)</p>
+                  <p class="max">Maximum File Size(Each file): 11MB</p>
+                  <div if:true={prepopulated} class="slds-grid slds-wrap slds-gutters_medium ">
+                    <template for:each={uploadedfile} for:item="filess" for:index="index">
+                      <span key={filess.Id}
+                        class=" slds-box slds-col slds-box_x-small slds-m-bottom_small slds-m-left_x-small ">
+                        <div class="slds-grid slds-wrap slds-gutters ">
+                          <div class="slds-col slds-size_3-of-12">
+                            <img if:true={filess.txttypes} src={txtImage}>
+                            <img if:true={filess.pngtypes} src={pngImage}>
+                            <img if:true={filess.giftypes} src={gifImage}>
+                            <img if:true={filess.xlstypes} src={xlsImage}>
+                            <img if:true={filess.xlsxtypes} src={xlsxImage}>
+                            <img if:true={filess.doctypes} src={docImage}>
+                            <img if:true={filess.docxtypes} src={docxImage}>
+                            <img if:true={filess.pdftypes} src={pdfImage}>
+                            <img if:true={filess.tifftypes} src={tiffImage}>
+                            <img if:true={filess.jpgtypes} src={jpegImage}>
+                            <img if:true={filess.bmptypes} src={bmpImage}>
+                          </div>
+                          <div class="slds-col slds-size_7-of-12">
+                            <p class="slds-text-body_regular">{filess.namesss}</p>
+                          </div>
+                          <div class="slds-col slds-size_2-of-12 ">
+                            <p>&times;</p>
+                          </div>
+                        </div>
+                      </span>
+                    </template>
+
+                  </div>
+                </div>
+                <div
+                  class="slds-box slds-theme_shade  slds-border_left slds-grid slds-wrap slds-grid_align-center fullBack">
+                  <div class="slds-size_1-of-1 slds-text-align_center">
+                    <img src={Questimg} alt="LIBTAYO" style="height: 65px; width: auto;">
+                  </div>
+                  <div class="slds-size_1-of-1">
+                    <p class="slds-text-heading_small slds-text-align_center" style="color: #00546E;">Questions?
+                    </p>
+                  </div>
+                  <div class="slds-size_1-of-1 slds-p-around_medium">
+                    <p class="slds-text-body_small slds-text-color_weak"
+                      style="font-family: Poppins; font-size: 12px; font-weight: 500; line-height: 18px; letter-spacing: 0.02em; text-align: left; color:#134453;">
+                      1. Call LIBTAYO® Surround at 1-877-542-8296 (Option 3), Monday - Friday, 8 AM to 8 PM ET
+                      for assistance with enrolling.
+                    </p>
+                    <p class="slds-text-body_small slds-text-color_weak"
+                      style="font-family: Poppins; font-size: 12px; font-weight: 500; line-height: 18px; letter-spacing: 0.02em; text-align: left; color:#134453;">
+                      2. You will need to submit a completed Patient Enrollment Form, including the Health
+                      Care Provider (HCP) section.
+                    </p>
+                  </div>
+
+
+                </div>
+                <div class="slds-grid slds-grid_align-center slds-m-vertical_large">
+                  <lightning-button label="Submit" onclick={handleFormSubmit} class="NextButton" variant="brand">
+                  </lightning-button>
+                </div>
+              </div>
+            </template>
+
+
+            <template if:true={thankYouForm}>
+              <div class="slds-text-align_center">
+                <p class="head">Patient Support Portal</p>
+                <img src={thankYou}>
+                <p>Thank you for uploading your documents. Your support team will add them to your account or contact
+                  you for more </p>
+                <p>information.</p>
+
+              </div>
+              <div class="slds-grid slds-grid_align-center slds-m-vertical_large">
+                <lightning-button label="Return To Home" onclick={ReturnHome} class="NextButton" variant="brand">
+                </lightning-button>
+              </div>
+            </template>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

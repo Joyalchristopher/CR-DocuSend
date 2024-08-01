@@ -1,0 +1,382 @@
+<template>
+    <div class="main">
+        <div class="notes">
+            <p class="heading">Welcome to the Patient Support Portal!</p>
+            <p>For any questions or concerns, please contact us at the phone number located on your enrollment form.</p>
+        </div>
+        <div if:true={patientForm} class="fulform">
+            <div class="notes">
+                <p class="head">Patient Information</p>
+                <p class="uploadNotes">For any questions or concerns, please contact us at the phone number located on
+                    your enrollment form.</p>
+            </div>
+           
+                <div class="formClass">
+                    <div class='div1'> <lightning-combobox
+                        name="submitterType"
+                        label="Submitter Type"
+                        value={selectedSubmitterType}
+                        options={picklistOptions}
+                        onchange={handleInputChange}
+                        required
+                    ></lightning-combobox><br><br>
+
+                    <div class="inputDiv">
+                        <div><lightning-input
+                            name="patientDateOfBirth"
+                            label="Patient Date of Birth"
+                            onchange={handleInputChange}
+                            type="date"
+                        ></lightning-input></div>
+                        <div><p class='warningnotes' if:true={DobErrorMessage}>Date of Birth is required</p>
+                        <p  class='warningnotes' if:true={DobErrorMessageValid}>Please enter a valid Date of Birth</p></div>
+                        </div>
+                    <br>
+
+                <div class="inputDiv" if:true={NoPatient}>
+                    <div><lightning-input
+                        name="submitterEmail"
+                        label="Submitter Email"
+                        onchange={handleInputChange}
+                        type="email"
+                    ></lightning-input></div>
+                    <div><p class='warningnotes' if:true={EmailErrorMessage}>Email is required</p>
+                    <p  class='warningnotes' if:true={EmailErrorMessageValid}>Please enter a valid email</p></div>
+                    </div>
+                
+                    </div>
+                    <div class='div1'> 
+                        <div class="inputDiv">
+                            <div><lightning-input
+                                name="patientFullName"
+                                label="Patient Full Name"
+                               data-field="patientFN"
+                                onchange={handleInputChange}
+                            ></lightning-input></div>
+                            <div><p class='warningnotes' if:true={fullNameErrorMessage}>Patient full name is required</p>
+                            <p  class='warningnotes' if:true={fullNameErrorMessageValid}>Please enter a valid full name</p></div>
+                            </div><br><br>
+                            <div class="inputDiv" if:true={NoPatient}>
+                                <div><lightning-input
+                                    name="submitterFullName"
+                                    label="Submitter Full Name"
+                                    onchange={handleInputChange} 
+                                    required
+                                ></lightning-input></div>
+                                <div><p class='warningnotes' if:true={SubNameErrorMessage}>Submitter full name is required</p>
+                                <p class='warningnotes' if:true={SubNameErrorMessageValid}>Please enter a valid Submitter full name</p></div>
+                                </div>
+
+                                <div class="inputDiv" if:true={PatientYes}>
+                                    <div><lightning-input
+                                        name="submitterEmail"
+                                        label="Patient Email"
+                                        onchange={handleInputChange}
+                                        type="email"
+                                    ></lightning-input></div>
+                                    <div><p class='warningnotes' if:true={EmailErrorMessage}>Email is required</p>
+                                    <p  class='warningnotes' if:true={EmailErrorMessageValid}>Please enter a valid email</p></div>
+                                    </div>
+                    
+                    </div>
+                </div>
+                <!-- <div class='center'>
+                    <iframe src={navigateTo} name="captchaFrame" onload={captchaLoaded} class="width"></iframe>
+                </div> -->
+                <div class='notes'>
+                    <p class='uploadNotes'>Please use the form below to upload documents.</p>
+                    <img src={lockIcon}>
+                    <p>Securely submit documents to the program using the upload feature below. All file uploads are
+                        secured using AES 256 SSL/TLS encryption.</p>
+                    <div>
+                        <div>
+                            <img src={warning}>
+                        </div>
+                        <div>
+                            <p class='warning'>Warning !</p>
+                        </div>
+                    </div>
+                    <p class='warningnotes'>1.Please be aware once you select your file, It cannot be removed.</p>
+                    <p class='warningnotes'>2.Do not upload password protected files, It will not be processed.</p>
+                </div>
+                <div class='center'>
+                    <div class="drop-zone" ondragover={handleDragOver} ondrop={handleDrop}>
+                        <lightning-input type="file" accept={acceptedFormats}   multiple onchange={handleFileChange} disabled={isButtonDisabled} class="fileUpload"></lightning-input>
+                        <p class="support">(Supported file formats are:
+                            docx,.doc,.pdf,.bmp,.xlsx,.xls,.txt,.jpg,.jpeg,.tiff,.tif,.gif,.png)</p>
+                        <p class="max">Maximum File Size(Each file) : 30MB</p>
+                        <div if:true={lastUploaded} class="overClass">
+                            <template for:each={uploadedfile} for:item="filess" for:index="index">
+                                <span key={filess.Id} class="flexii">
+                                    <div class="flexiclass">
+                                        <div>
+
+                                            <img if:true={filess.txttypes} src={txtImage} class="icon">
+                                            <img if:true={filess.pngtypes} src={pngImage} class="icon">
+                                            <img if:true={filess.giftypes} src={gifImage} class="icon">
+                                            <img if:true={filess.xlstypes} src={xlsImage} class="icon">
+                                            <img if:true={filess.xlsxtypes} src={xlsxImage} class="icon">
+                                            <img if:true={filess.doctypes} src={docImage} class="icon">
+                                            <img if:true={filess.docxtypes} src={docxImage} class="icon">
+                                            <img if:true={filess.pdftypes} src={pdfImage} class="icon">
+                                            <img if:true={filess.tifftypes} src={tiffImage} class="icon">
+                                            <img if:true={filess.jpgtypes} src={jpegImage} class="icon">
+                                            <img if:true={filess.bmptypes} src={bmpImage} class="icon">
+
+                                        </div>
+                                        <div>
+                                            <p class="fileName">{filess.namesss}</p>
+                                        </div>
+                                        <div>
+                                            <p>&times;</p>
+                                        </div>
+                                    </div>
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="fullclass">
+                        <img src={img} class="img" alt="LIBTAYO">
+                        <p class="title">Questions?</p>
+                        <div class="contant">
+                            <p>1. Call LIBTAYO® Surround at 1.877.LIBTAYO® (1.877.542.8296) Option 1, Monday–Friday, 8
+                                AM–8 PM Eastern time</p>
+                            <p>2. Contact your óocaó Reimbursement Manager for assistance</p>
+                        </div>
+                    </div>
+                    <div>
+                        <iframe src={navigateToV3} name="captchaFrame" onload={captchaLoadedV3} class="test"></iframe>
+                    </div>
+
+                </div>
+                <div class="buttonSubmit">  
+                    <lightning-button label="Back"
+                    onclick={handleBackButtonClick}
+                    variant="brand"
+                    class="SubmitBut"> </lightning-button>
+                     <lightning-button
+                    label="Submit"
+                    onclick={handleFormSubmit}
+                    variant="brand"
+                    class="SubmitBut"
+                ></lightning-button>
+            
+                
+            </div>
+
+             
+         
+        </div>
+
+      <div if:true={thankYouForm} class="fulform">
+        <div class="notes">
+            <p class="head">Patient Support Portal</p>
+            <img src={thankYou}>
+            <p>Thank you for uploading your documents. Your support team will add them to your account or contact you for more </p>
+            <p>information.</p>
+        </div>
+      </div>
+
+        <template if:true={uploadfilepoppup}>
+            <div class="modal-backdrop"></div>
+            <div class="modal-visible" ondragover={handleDragOver} ondrop={handleDrop}>
+                <div class="Header">
+                    <div class="heading">Validating your selected Files</div>
+                    <div class="close" onclick={closeUploadFiles}>
+                        <p class="times">&times;</p>
+                    </div>
+                </div>
+                <div>
+                    <template for:each={fileeeemulti} for:item="filesssss" for:index="index">
+                        <div key={filesssss.Id} class="flexclass" data-id={filesssss.Id}>
+                            <div>
+                                <img if:true={filesssss.txttypes} src={txtImage}>
+                                <img if:true={filesssss.pngtypes} src={pngImage}>
+                                <img if:true={filesssss.giftypes} src={gifImage}>
+                                <img if:true={filesssss.xlstypes} src={xlsImage}>
+                                <img if:true={filesssss.xlsxtypes} src={xlsxImage}>
+                                <img if:true={filesssss.doctypes} src={docImage}>
+                                <img if:true={filesssss.docxtypes} src={docxImage}>
+                                <img if:true={filesssss.pdftypes} src={pdfImage}>
+                                <img if:true={filesssss.tifftypes} src={tiffImage}>
+                                <img if:true={filesssss.jpgtypes} src={jpegImage}>
+                                <img if:true={filesssss.bmptypes} src={bmpImage}>
+
+                            </div>
+                            <div class="nameClass">
+                                <div>
+                                    <p>{filesssss.namesss}</p>
+                                </div>
+                                <div>
+                                    <p>{filesssss.mbSize} MB</p>
+                                </div>
+                            </div>
+                            <div class="progressClass">
+                                <div class="myProgress">
+                                    <div data-id={filesssss.Id} class="myBar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div if:true={filesssss.close} class="crossFunc" data-id={filesssss.Id} onclick={crossEvent}>
+                                <p>&times;</p>
+                            </div>
+                            <div if:true={filesssss.tick} data-id={filesssss.Id} class="tickClass">
+                                <p><img src={tickIcon}></p>
+                            </div>
+                            <div if:true={filesssss.error} data-id={filesssss.Id}><button class="errorColor">i</button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div class="EnDiv">
+                    <div>
+                        <p>{completedCount} of {filecount} files Uploaded</p>
+                    </div>
+                    <!-- <div class="DoneButton"><button class="Dbut" onclick={doneClick}>Done</button>  
+                        </div> -->
+                        <div class="DoneButton"><button class="Dbut" onclick={doneClickUpload}>Upload Now</button>  
+                        </div>
+                </div>
+            </div>
+        </template>
+
+        <template if:true={reupload}>
+            <div class="modal-backdrop"></div>
+            <div class="modal-visible" ondragover={handleDragOver} ondrop={handleDrop}>
+                <div class="Header">
+                    <div class="heading">File Exceeds 30MB</div>
+                    <div class="close">
+                        <p class="times">&times;</p>
+                    </div>
+                </div>
+                <div>
+                    <template for:each={largerfile} for:item="Larger" for:index="index">
+                        <div key={Larger.Id} class="flexclass" data-id={Larger.Id}>
+                            <div>
+                                <img if:true={Larger.txttypes} src={txtImage}>
+                                <img if:true={Larger.pngtypes} src={pngImage}>
+                                <img if:true={Larger.giftypes} src={gifImage}>
+                                <img if:true={Larger.xlstypes} src={xlsImage}>
+                                <img if:true={Larger.xlsxtypes} src={xlsxImage}>
+                                <img if:true={Larger.doctypes} src={docImage}>
+                                <img if:true={Larger.docxtypes} src={docxImage}>
+                                <img if:true={Larger.pdftypes} src={pdfImage}>
+                                <img if:true={Larger.tifftypes} src={tiffImage}>
+                                <img if:true={Larger.jpgtypes} src={jpegImage}>
+                                <img if:true={Larger.bmptypes} src={bmpImage}>
+
+                            </div>
+                            <div class="nameClass">
+                                <div>
+                                    <p>{Larger.namesss}</p>
+                                </div>
+                                <div>
+                                    <p>{Larger.mbSize} MB</p>
+                                </div>
+                            </div>
+
+                            <div if:true={errorValue} data-id={Larger.Id}><button class="errorColor">i</button></div>
+                        </div>
+                    </template>
+                </div>
+                <div class="EnDiv">
+                    <div>
+                        <p>{completedCount} of {filecount} files Uploaded</p>
+                    </div>
+                    <div class="DoneButton">
+                        <input type="file" class="file-input" onchange={handleFileChange} style="display:none;" />
+                        <button onclick={handleButtonClick} class="Dbut">Reupload</button>
+
+                        
+                    
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template if:true={limitUpload}>
+            <div class="modal-backdrop"></div>
+            <div class="modal-visible" ondragover={handleDragOver} ondrop={handleDrop}>
+                <div class="Header">
+                    <div class="warningupload">Warning</div>
+                    <div onclick={closeUploadLimit}>
+                        <p class="times">&times;</p>
+                    </div>
+                </div>
+                <div class="uploadLimit">
+                    <p>Upload limit exceeded. The maximum number of files </p>
+                    <p>allowed for upload is 10.</p>
+                </div>
+                <div class="uploadClose"> <button onclick={closeUploadLimit}>Close</button></div>
+
+            </div>
+        </template>
+
+
+
+
+
+        <template if:true={UploadProgress}>
+            <div class="modal-backdrop"></div>
+            <div class="modal-visible" >
+                <div class="Header">
+                    <div class="heading">Files upload in progress</div>
+                    <div onclick={closeUploadLimit}>
+                        <p class="times">&times;</p>
+                    </div>
+                </div>
+                <p   if:true={bandwidthLow}  class='warningnotes'>Your bandwidth is low,please wait your file are uploading....{downlink}Mbps</p>
+                 <div class="progressClass">
+                                <div class="myProgressUpload">
+                                    <div  class="myBarUpload" style="width: 0%;"></div>
+                                </div>
+                            </div>
+              
+
+            </div>
+        </template>
+
+
+
+        <template if:true={CloseUpload}>
+            <div class="modal-backdropOver"></div>
+            <div class="modal-visibleOver" ondragover={handleDragOver} ondrop={handleDrop}>
+                <div class="Header">
+                    <div class="warningupload">Warning</div>
+                    <div onclick={closeUploadCross}>
+                        <p class="times">&times;</p>
+                    </div>
+                </div>
+                <div class="uploadLimit">
+                    <p>Closing this screen will discard any uploaded files.
+                        </p>
+                    <p> Are you sure you want to proceed?</p>
+                </div>
+                <div class="uploadClose"> <button onclick={closeUploadLimit}>Close</button></div>
+
+            </div>
+        </template>
+
+
+
+        <template if:true={deselectUpload}>
+            <div class="modal-backdropOver"></div>
+            <div class="modal-visibleOver" >
+                <div class="Header">
+                    <div class="warningupload">Warning</div>
+                    <div onclick={deslectUploadCross}>
+                        <p class="times">&times;</p>
+                    </div>
+                </div>
+                <div class="uploadLimit">
+                    <p>Are you sure you want to remove this file ?.
+                        </p>
+                
+                </div>
+                <div class="uploadClose"> <button onclick={UploadRemove}>YES</button><button onclick={deslectUploadCross}>NO</button></div>
+
+            </div>
+        </template>
+
+    </div>
+    <lightning-spinner if:true={isLoading} alternative-text="Loading"></lightning-spinner>
+</template>

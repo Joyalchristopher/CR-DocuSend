@@ -1,0 +1,117 @@
+.fulldiv {
+    background-color: var(--slds-g-color-palette-blue-95, #EEF4FF);
+}
+
+.NextButton {
+    --slds-c-button-brand-color-background: var(--slds-g-color-palette-pink-50, #E3066A);
+    --slds-c-button-brand-text-color: var(--slds-g-color-neutral-base-white, #ffffff);
+    --slds-c-button-radius-border: var(--lwc-borderRadiusLarge);
+    --slds-c-button-brand-color-border: var(--slds-g-color-palette-pink-50, #E3066A);
+    --slds-c-button-brand-color-background-hover: var(--slds-g-color-palette-pink-50, #E3066A);
+}
+
+.inputError {
+
+    --slds-c-input-color-border: var(--slds-g-color-error-base-50, #EA001E);
+    --lwc-colorTextDefault: var(--slds-g-color-error-base-50, #EA001E);
+}
+
+.wihiteBack {
+    border-radius: var(--lwc-borderRadiusLarge);
+    background: var(--lwc-colorBackgroundAlt);
+}
+
+.heading {
+    font-weight: var(--lwc-fontWeightBold);
+    font-size: var(--c-Font30);
+}
+
+.subHeading {
+    font-size: var(--c-Font16);
+    font-weight: var(--lwc-fontWeightRegular);
+}
+
+.backround {
+    border-radius: var(--lwc-borderRadiusLarge);
+    border: 2px solid var(--slds-g-color-neutral-base-white, #ffffff);
+}
+
+
+.slds-m-around_medium,
+.slds-m-around--medium {
+    height: 70vh;
+}
+
+.red {
+    color: var(--lwc-colorTextError);
+}
+
+.test{
+    border: none;
+     margin-right: 225px;
+height:82px;
+
+    }
+
+.fullBack {
+    background-color: var(--slds-g-color-brand-base-95, #EEF4FF);
+    border-radius: var(--lwc-borderRadiusLarge);
+    border: 1px solid var(--slds-g-link-color, #0B5CAB);
+}
+
+.tophead {
+    font-size: var(--c-Font30);
+    font-weight: var(--lwc-fontWeightBold);
+}
+
+.head {
+    font-size: var(--c-Font20);
+    font-weight: var(--lwc-fontWeightBold);
+
+}
+
+.uploadNotes {
+    color: var(--slds-g-link-color, #0B5CAB);
+    font-weight: var(--lwc-fontWeightBold);
+    font-size: var(--c-Font16);
+}
+
+.warningnotes {
+    color: var(--slds-g-color-error-base-50, #EA001E);
+    font-size: var(--c-Font14);
+}
+
+.warning {
+    color: var(--slds-g-color-error-base-50, #EA001E);
+    font-size: var(--c-Font16);
+    font-weight: var(--lwc-fontWeightBold);
+}
+
+.support {
+    font-size: var(--c-Font10);
+    color: var(--slds-g-color-neutral-base-10, #181818);
+}
+
+.max {
+
+    font-size: var(--c-Font10);
+    color: var(--slds-g-color-brand-base-40, #0B5CAB);
+}
+
+.main {
+    background-color: var(--slds-g-color-palette-blue-95, #EEF4FF);
+}
+
+
+@media only screen and (max-width: 600px) {
+    .responsive-grid {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .responsive-col {
+        width: 100%;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
